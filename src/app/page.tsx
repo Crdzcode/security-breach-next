@@ -1,14 +1,15 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Suspense, useEffect, useRef, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useSocket } from '@/components/SocketProvider';
 import { Scanlines } from '@/components/Scanlines';
 import type { LoginSuccessPayload, AdminLoginSuccessPayload } from '@/types/game';
 import styles from './page.module.css';
 
-export default function LoginPage() {
+function LoginContent() {
   const router = useRouter();
+  const params = useSearchParams();
   const { socket } = useSocket();
 
   const [codename, setCodename] = useState('');
@@ -17,6 +18,12 @@ export default function LoginPage() {
   const [loading, setLoading]   = useState(false);
 
   const pendingCodename = useRef('');
+
+  // Pré-preenche roomId a partir do parâmetro ?room= da URL
+  useEffect(() => {
+    const fromUrl = params.get('room')?.toUpperCase() ?? '';
+    if (fromUrl) setRoomId(fromUrl);
+  }, [params]);
 
   // Limpa apenas a sessão desta aba — sessionStorage é por-aba, não afeta outras abas
   useEffect(() => { sessionStorage.clear(); }, []);
@@ -106,5 +113,17 @@ export default function LoginPage() {
         <p className={styles.warning}>⚠ Sistema de rastreamento ativo. Acesso monitorado.</p>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div>
+        <Scanlines variant="green" />
+      </div>
+    }>
+      <LoginContent />
+    </Suspense>
   );
 }

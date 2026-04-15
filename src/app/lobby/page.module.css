@@ -37,6 +37,28 @@
   padding: 0.4rem 1.2rem;
 }
 
+.qrWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  border-left: 1px solid rgba(0, 255, 0, 0.3);
+  padding-left: 1rem;
+  margin-left: 0.2rem;
+}
+
+.qrWrap svg {
+  display: block;
+  box-shadow: 0 0 12px rgba(0, 255, 0, 0.35);
+}
+
+.qrLabel {
+  font-size: 0.52rem;
+  letter-spacing: 0.08rem;
+  opacity: 0.6;
+  text-align: center;
+}
+
 .codeLabel {
   font-size: 0.75rem;
   opacity: 0.6;

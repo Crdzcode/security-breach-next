@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { QRCodeSVG } from 'qrcode.react';
 import { useSocket } from '@/components/SocketProvider';
 import { Scanlines } from '@/components/Scanlines';
 import type { PlayerPublic, RoomStatePayload, GameUpdatePayload, TurnReportPayload } from '@/types/game';
@@ -150,6 +151,16 @@ function LobbyContent() {
             <div className={styles.roomBadge}>
               <span className={styles.codeLabel}>SALA</span>
               <span className={styles.code}>{roomId}</span>
+              <div className={styles.qrWrap}>
+                <QRCodeSVG
+                  value={`${process.env.NEXT_PUBLIC_APP_URL ?? (typeof window !== 'undefined' ? window.location.origin : '')}/?room=${roomId}`}
+                  size={100}
+                  bgColor="#000000"
+                  fgColor="#00ff00"
+                  level="M"
+                />
+                <span className={styles.qrLabel}>▲ ESCANEIE PARA ENTRAR</span>
+              </div>
             </div>
           ) : (
             <form className={styles.codeForm} onSubmit={handleWatch}>
