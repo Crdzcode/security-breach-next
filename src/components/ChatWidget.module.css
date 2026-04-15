@@ -40,6 +40,7 @@
   right: 1.2rem;
   z-index: 199;
   width: 300px;
+  max-width: calc(100vw - 1.2rem);
   height: 420px;
   background: #000;
   border: 2px solid rgba(0, 255, 0, 0.6);
@@ -49,14 +50,14 @@
   box-shadow: 0 0 20px rgba(0, 255, 0, 0.15);
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .panel {
-    right: 0;
-    left: 0;
-    width: 100%;
+    right: 0.6rem;
+    left: 0.6rem;
+    width: auto;
     bottom: 3.8rem;
-    border-left: none;
-    border-right: none;
+    border-left: 2px solid rgba(0, 255, 0, 0.6);
+    border-right: 2px solid rgba(0, 255, 0, 0.6);
   }
   .fab {
     right: 0.8rem;

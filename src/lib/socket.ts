@@ -12,8 +12,9 @@ export function getSocket(): Socket {
       transports: ["websocket", "polling"],  // websocket primeiro, polling como fallback
       autoConnect: false,                    // conectamos manualmente
       reconnection: true,
-      reconnectionAttempts: 10,
-      reconnectionDelay: 1000,
+      reconnectionAttempts: 20,
+      reconnectionDelay: 1500,
+      reconnectionDelayMax: 6000,
     });
   }
   return socket;

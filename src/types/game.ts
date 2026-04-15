@@ -192,6 +192,12 @@ export interface BlackjackResultPayload {
   retryAvailable?: boolean;
 }
 
+export interface RejoinSuccessPayload {
+  phase:   GamePhase;
+  round:   number;
+  players: PlayerPublic[];
+}
+
 export interface AutopsyResultPayload {
   targetCodename: string;
   targetDisplayName: string;

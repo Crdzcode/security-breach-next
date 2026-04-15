@@ -9,6 +9,7 @@ import type {
   TurnReportPayload,
   GameUpdatePayload,
   AutopsyResultPayload,
+  RejoinSuccessPayload,
 } from '@/types/game';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -93,12 +94,38 @@ export function GameNavigationHandler() {
       sessionStorage.setItem('vipEscapeNotice', '1');
     };
 
+    // Reconexão — navega para a tela correta baseado na fase atual do servidor
+    const onRejoinSuccess = (payload: RejoinSuccessPayload) => {
+      if (!isPlayer()) return;
+
+      sessionStorage.setItem('currentRound', String(payload.round));
+      sessionStorage.setItem('roundPlayers', JSON.stringify(payload.players));
+
+      const raw = sessionStorage.getItem('myPlayer');
+      if (!raw) return;
+      const myCodename = (JSON.parse(raw) as { codename: string }).codename;
+      const me = payload.players.find((p) => p.codename === myCodename);
+
+      if (payload.phase === 'action') {
+        sessionStorage.removeItem('actionsUsed');
+        if (me && (me.status === 'deceased' || me.status === 'arrested' || me.status === 'downed' || me.status === 'hiding')) {
+          if (!isAt('/spectate')) router.push('/spectate');
+        } else {
+          if (!isAt('/actions-menu')) router.push('/actions-menu');
+        }
+      } else if (payload.phase === 'report' || payload.phase === 'resolving') {
+        if (!isAt('/round-end')) router.push('/round-end');
+      }
+      // lobby e game_over: não força navegação — usuário pode estar em tela informativa
+    };
+
     socket.on('server:game_started',      onGameStarted);
     socket.on('server:blackjack_start',   onBlackjackStart);
     socket.on('server:turn_report',       onTurnReport);
     socket.on('server:game_update',       onGameUpdate);
     socket.on('server:autopsy_result',    onAutopsyResult);
     socket.on('server:vip_auto_escaped',  onVipAutoEscaped);
+    socket.on('server:rejoin_success',    onRejoinSuccess);
 
     return () => {
       socket.off('server:game_started',      onGameStarted);
@@ -107,6 +134,7 @@ export function GameNavigationHandler() {
       socket.off('server:game_update',       onGameUpdate);
       socket.off('server:autopsy_result',    onAutopsyResult);
       socket.off('server:vip_auto_escaped',  onVipAutoEscaped);
+      socket.off('server:rejoin_success',    onRejoinSuccess);
     };
   }, [socket, router]);
 
