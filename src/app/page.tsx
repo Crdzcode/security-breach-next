@@ -33,8 +33,9 @@ export default function LoginPage() {
       router.push('/player-lobby');
     };
 
-    const onAdminSuccess = (_data: AdminLoginSuccessPayload) => {
-      sessionStorage.setItem('player', 'admin');
+    const onAdminSuccess = (data: AdminLoginSuccessPayload) => {
+      sessionStorage.setItem('player',   'admin');
+      sessionStorage.setItem('myPlayer', JSON.stringify({ codename: data.codename, role: 'admin' }));
       router.push('/admin');
     };
 

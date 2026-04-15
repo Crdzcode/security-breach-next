@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useSocket } from '@/components/SocketProvider';
 import { Scanlines } from '@/components/Scanlines';
 import type { RoomPublic } from '@/types/game';
@@ -16,12 +17,26 @@ const PHASE_LABEL: Record<string, string> = {
 
 export default function AdminPage() {
   const { socket, connected } = useSocket();
+  const router                            = useRouter();
+  const [authorized, setAuthorized]       = useState(false);
   const [rooms, setRooms]                 = useState<RoomPublic[]>([]);
   const [lastCreated, setLastCreated]     = useState('');
   const [error, setError]                 = useState('');
   const [duration, setDuration]           = useState(120);
   const [expectedPlayers, setExpectedPlayers] = useState(8);
   const [tasks, setTasks]                 = useState(40);
+
+  // Guard: só admins autenticados podem acessar esta página
+  useEffect(() => {
+    const raw = sessionStorage.getItem('myPlayer');
+    if (!raw) { router.replace('/'); return; }
+    const me = JSON.parse(raw) as { codename: string; role?: string };
+    if (me.codename !== 'admin' && me.role !== 'admin') {
+      router.replace('/');
+      return;
+    }
+    setAuthorized(true);
+  }, [router]);
 
   useEffect(() => {
     if (!error) return;
@@ -72,6 +87,8 @@ export default function AdminPage() {
   function startGame(roomId: string) { socket?.emit('admin:start_game', roomId); }
   function deleteRoom(roomId: string){ socket?.emit('admin:delete_room', roomId); }
   function refreshRooms()            { socket?.emit('admin:list_rooms'); }
+
+  if (!authorized) return null;
 
   return (
     <div className={styles.page}>
