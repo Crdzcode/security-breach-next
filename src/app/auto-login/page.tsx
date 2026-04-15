@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useSocket } from '@/components/SocketProvider';
 import { Scanlines } from '@/components/Scanlines';
@@ -13,7 +13,7 @@ import type { LoginSuccessPayload } from '@/types/game';
 // Lê os parâmetros da URL e emite client:login imediatamente ao conectar.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function AutoLoginPage() {
+function AutoLoginContent() {
   const router       = useRouter();
   const params       = useSearchParams();
   const { socket }   = useSocket();
@@ -63,5 +63,18 @@ export default function AutoLoginPage() {
       <Scanlines variant="green" />
       <p style={{ position: 'relative', zIndex: 1, fontSize: '1rem', opacity: 0.8 }}>{status}</p>
     </div>
+  );
+}
+
+export default function AutoLoginPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+        <Scanlines variant="green" />
+        <p style={{ position: 'relative', zIndex: 1, fontSize: '1rem', opacity: 0.8 }}>Conectando...</p>
+      </div>
+    }>
+      <AutoLoginContent />
+    </Suspense>
   );
 }

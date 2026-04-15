@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useSocket } from '@/components/SocketProvider';
@@ -14,7 +14,7 @@ function formatTime(seconds: number): string {
   return `${String(m).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 }
 
-export default function LobbyPage() {
+function LobbyContent() {
   const { socket, connected } = useSocket();
   const searchParams           = useSearchParams();
   const router                 = useRouter();
@@ -237,5 +237,18 @@ export default function LobbyPage() {
         </footer>
       </div>
     </div>
+  );
+}
+
+export default function LobbyPage() {
+  return (
+    <Suspense fallback={
+      <div className={styles.page}>
+        <Scanlines variant="green" />
+        <div className={styles.container} />
+      </div>
+    }>
+      <LobbyContent />
+    </Suspense>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { useSocket } from '@/components/SocketProvider';
@@ -32,7 +32,7 @@ const STATUS_SYMBOL: Record<string, string> = {
 // Tela pública (TV) — exibe o relatório da rodada em landscape
 // Jogadores vão para /round-end após a rodada
 
-export default function ReportScreenPage() {
+function ReportScreenContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { socket } = useSocket();
@@ -173,5 +173,17 @@ export default function ReportScreenPage() {
 
       </div>
     </div>
+  );
+}
+
+export default function ReportScreenPage() {
+  return (
+    <Suspense fallback={
+      <div className={styles.page}>
+        <Scanlines variant="green" />
+      </div>
+    }>
+      <ReportScreenContent />
+    </Suspense>
   );
 }
