@@ -9,8 +9,8 @@ let socket: Socket | null = null;
 export function getSocket(): Socket {
   if (!socket) {
     socket = io(URL, {
-      transports: ["websocket"],   // evita long-polling
-      autoConnect: false,          // conectamos manualmente
+      transports: ["websocket", "polling"],  // websocket primeiro, polling como fallback
+      autoConnect: false,                    // conectamos manualmente
       reconnection: true,
       reconnectionAttempts: 10,
       reconnectionDelay: 1000,
