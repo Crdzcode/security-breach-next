@@ -1,66 +1,69 @@
-"use client";
+'use client';
 
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { getSocket } from "@/lib/socket";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { getSocket } from '@/lib/socket';
+import type { Socket } from 'socket.io-client';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Contexto
+// ─────────────────────────────────────────────────────────────────────────────
 
 type SocketCtx = {
-  socket: ReturnType<typeof getSocket> | null;
+  socket: Socket | null;
   connected: boolean;
-  ping: (payload: unknown) => void;
 };
 
 const SocketContext = createContext<SocketCtx | null>(null);
 
-export function SocketProvider({ children }: { children: React.ReactNode }) {
-  const [connected, setConnected] = useState(false);
-  const socketRef = useRef<ReturnType<typeof getSocket> | null>(null);
-  useEffect(() => {
-    // 🚨 Aqui é 100% garantido que estamos no CLIENTE (browser)
-    const socket = getSocket();
-    socketRef.current = socket;
+// ─────────────────────────────────────────────────────────────────────────────
+// Provider
+//
+// socket é estado React — não um ref capturado em useMemo.
+// Isso garante que consumidores re-renderizam quando a conexão muda,
+// inclusive em hot reload onde o singleton já pode estar conectado.
+// ─────────────────────────────────────────────────────────────────────────────
 
-    const onConnect = () => setConnected(true);
+export function SocketProvider({ children }: { children: React.ReactNode }) {
+  const [socket, setSocket] = useState<Socket | null>(null);
+  const [connected, setConnected] = useState(false);
+
+  useEffect(() => {
+    const s = getSocket();
+
+    const onConnect    = () => { setSocket(s); setConnected(true); };
     const onDisconnect = () => setConnected(false);
 
-    socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
+    s.on('connect',    onConnect);
+    s.on('disconnect', onDisconnect);
 
-    if (!socket.connected) {
-      socket.connect();
+    if (s.connected) {
+      // Socket já estava conectado (singleton reaproveitado após hot reload)
+      setSocket(s);
+      setConnected(true);
+    } else {
+      s.connect();
     }
 
     return () => {
-      socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
-      // NÃO dar socket.disconnect() aqui, para manter vivo entre rotas
+      s.off('connect',    onConnect);
+      s.off('disconnect', onDisconnect);
+      // NÃO desconectar — manter vivo entre rotas
     };
   }, []);
 
-  const value = useMemo(
-    () => ({
-      socket: socketRef.current,
-      connected,
-      ping: (payload: unknown) => {
-        const s = socketRef.current;
-        if (!s) {
-          console.warn("Socket not initialized yet");
-          return;
-        }
-        s.emit("client:ping", payload, (ack: any) => {
-          console.log("[ack]", ack);
-        });
-      },
-    }),
-    [connected]
+  return (
+    <SocketContext.Provider value={{ socket, connected }}>
+      {children}
+    </SocketContext.Provider>
   );
-
-  return <SocketContext.Provider value={value}>{children}</SocketContext.Provider>;
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Hook
+// ─────────────────────────────────────────────────────────────────────────────
 
 export function useSocket() {
   const ctx = useContext(SocketContext);
-  if (!ctx) {
-    throw new Error("useSocket must be used inside SocketProvider");
-  }
+  if (!ctx) throw new Error('useSocket must be used inside SocketProvider');
   return ctx;
 }

@@ -1,0 +1,234 @@
+/* ── Blackjack — mobile-first immersive ── */
+
+@keyframes dealCard {
+  from { opacity: 0; transform: translateY(-18px) scale(0.88); }
+  to   { opacity: 1; transform: translateY(0)      scale(1);   }
+}
+
+.page {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  padding: 1.2rem 1.4rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+  margin-bottom: 1.2rem;
+}
+
+.title {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+  animation: flicker 2s infinite alternate;
+}
+
+.abilityLabel {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin: 0 0 0.15rem;
+}
+
+.target { color: #f90; }
+
+.winProgress {
+  font-size: 0.8rem;
+  color: #0f0;
+  margin: 0 0 0.2rem;
+}
+
+.modHint {
+  font-size: 0.7rem;
+  color: rgba(0, 255, 0, 0.5);
+  margin: 0.25rem 0 0;
+}
+
+/* ── Hand sections ── */
+.handSection {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+.handTitle {
+  font-size: 0.78rem;
+  margin-bottom: 0.8rem;
+  opacity: 0.6;
+  letter-spacing: 0.08em;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(0, 255, 0, 0.75);
+  padding: 0.55rem 0.7rem;
+  font-size: 1.45rem;
+  min-width: 3rem;
+  min-height: 4rem;
+  background: rgba(0, 255, 0, 0.04);
+  animation: dealCard 0.3s ease-out both;
+}
+
+.cardHidden {
+  border-color: rgba(0, 255, 0, 0.25);
+  border-style: dashed;
+  background: rgba(0, 255, 0, 0.01);
+  color: rgba(0, 255, 0, 0.3);
+  font-size: 1.1rem;
+}
+
+.divider {
+  text-align: center;
+  opacity: 0.18;
+  padding: 0.2rem 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.1rem;
+}
+
+/* ── Action buttons ── */
+.actions {
+  display: flex;
+  gap: 0.6rem;
+  padding-top: 1.2rem;
+  margin-top: auto;
+}
+
+.hitBtn,
+.standBtn,
+.cancelBtn {
+  flex: 1;
+  background: #000;
+  font-family: var(--font-terminal);
+  padding: 0.9rem 0.4rem;
+  cursor: pointer;
+}
+
+.hitBtn {
+  font-size: 1.1rem;
+  border: 2px solid #0f0;
+  color: #0f0;
+  animation: pulse-green 1.2s infinite alternate;
+}
+
+.standBtn {
+  font-size: 1.1rem;
+  border: 2px solid #f90;
+  color: #f90;
+}
+
+.cancelBtn {
+  flex: 0.55;
+  font-size: 0.82rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.hitBtn:hover    { background: rgba(0, 255, 0, 0.07); }
+.standBtn:hover  { background: rgba(255, 153, 0, 0.07); }
+.cancelBtn:hover { background: rgba(255, 255, 255, 0.04); }
+
+.hitBtn:disabled,
+.standBtn:disabled {
+  opacity: 0.45;
+  cursor: default;
+  animation: none;
+  box-shadow: none;
+}
+
+/* ── Result ── */
+.result {
+  margin-top: 1.5rem;
+  border: 2px solid;
+  padding: 1.2rem 1rem;
+  text-align: center;
+}
+
+.success {
+  border-color: #0f0;
+  box-shadow: 0 0 18px rgba(0, 255, 0, 0.35);
+}
+
+.failure {
+  border-color: #f00;
+  box-shadow: 0 0 18px rgba(255, 0, 0, 0.35);
+}
+
+.resultOutcome {
+  font-size: 1.35rem;
+  margin: 0 0 0.5rem;
+  animation: flicker 1.5s infinite alternate;
+}
+
+.success .resultOutcome { color: #0f0; }
+.failure .resultOutcome { color: #f00; }
+
+.resultDesc {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin: 0 0 1rem;
+}
+
+.continueBtn {
+  background: #000;
+  border: 1px solid #0f0;
+  color: #0f0;
+  font-family: var(--font-terminal);
+  font-size: 0.95rem;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+}
+
+.continueBtn:hover {
+  background: rgba(0, 255, 0, 0.06);
+}
+
+/* ── Retry state (vantagem +1 — primeira tentativa falhou) ── */
+.retryHint {
+  font-size: 0.75rem;
+  color: #f90;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.9rem;
+  animation: flicker 1.8s infinite alternate;
+}
+
+.retryBtn {
+  background: #000;
+  border: 2px solid #f90;
+  color: #f90;
+  font-family: var(--font-terminal);
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
+  cursor: pointer;
+  animation: pulse-orange 1.2s infinite alternate;
+}
+
+.retryBtn:hover {
+  background: rgba(255, 153, 0, 0.08);
+}
+
+@keyframes pulse-orange {
+  from { box-shadow: none; }
+  to   { box-shadow: 0 0 10px rgba(255, 153, 0, 0.5); }
+}

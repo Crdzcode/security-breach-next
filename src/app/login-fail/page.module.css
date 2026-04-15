@@ -1,0 +1,70 @@
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  color: #f00;
+}
+
+.terminal {
+  border: 2px solid #f00;
+  padding: 2rem;
+  width: 450px;
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 0 20px #f00;
+  text-align: center;
+  animation: flicker-red 1.2s infinite alternate;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  position: relative;
+}
+
+.title::before,
+.title::after {
+  content: 'ACESSO NEGADO';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  opacity: 0.6;
+}
+
+.title::before {
+  top: -2px;
+  color: #f0f;
+  animation: glitchTop 0.3s infinite;
+}
+
+.title::after {
+  top: 2px;
+  color: #0ff;
+  animation: glitchBottom 0.3s infinite;
+}
+
+.backLink {
+  color: #f00;
+  border: 1px solid #f00;
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-family: var(--font-terminal);
+  animation: pulse-red 1.2s infinite;
+}
+
+.footer {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 520px) {
+  .terminal {
+    width: 280px;
+  }
+}

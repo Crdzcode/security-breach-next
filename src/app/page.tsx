@@ -1,21 +1,109 @@
-"use client";
-import { useSocket } from "@/components/SocketProvider";
+'use client';
 
-export default function Home() {
-  const { connected, ping, socket } = useSocket();
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useSocket } from '@/components/SocketProvider';
+import { Scanlines } from '@/components/Scanlines';
+import type { LoginSuccessPayload, AdminLoginSuccessPayload } from '@/types/game';
+import styles from './page.module.css';
+
+export default function LoginPage() {
+  const router = useRouter();
+  const { socket } = useSocket();
+
+  const [codename, setCodename] = useState('');
+  const [password, setPassword] = useState('');
+  const [roomId, setRoomId]     = useState('');
+  const [loading, setLoading]   = useState(false);
+
+  const pendingCodename = useRef('');
+
+  // Limpa apenas a sessão desta aba — sessionStorage é por-aba, não afeta outras abas
+  useEffect(() => { sessionStorage.clear(); }, []);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    const onSuccess = (data: LoginSuccessPayload) => {
+      // Persiste snapshot em sessionStorage (isolado por aba — sem conflito entre jogadores)
+      sessionStorage.setItem('player',        pendingCodename.current.toLowerCase());
+      sessionStorage.setItem('roomId',        data.roomId);
+      sessionStorage.setItem('myPlayer',      JSON.stringify(data.player));
+      sessionStorage.setItem('lobbySnapshot', JSON.stringify(data.players));
+      router.push('/player-lobby');
+    };
+
+    const onAdminSuccess = (_data: AdminLoginSuccessPayload) => {
+      sessionStorage.setItem('player', 'admin');
+      router.push('/admin');
+    };
+
+    const onFailure = () => {
+      setLoading(false);
+      router.push('/login-fail');
+    };
+
+    socket.on('server:login_success',       onSuccess);
+    socket.on('server:admin_login_success', onAdminSuccess);
+    socket.on('server:login_failure',       onFailure);
+
+    return () => {
+      socket.off('server:login_success',       onSuccess);
+      socket.off('server:admin_login_success', onAdminSuccess);
+      socket.off('server:login_failure',       onFailure);
+    };
+  }, [socket, router]);
+
+  function handleSubmit(e: { preventDefault(): void }) {
+    e.preventDefault();
+    if (!socket || loading) return;
+    pendingCodename.current = codename;
+    setLoading(true);
+    socket.emit('client:login', {
+      codename,
+      password,
+      roomId: roomId.trim().toUpperCase() || undefined,
+    });
+  }
 
   return (
-    <main style={{ padding: 24 }}>
-      <h1>Next.js + Socket.IO</h1>
-      <p>Status: {connected ? "online" : "offline"}</p>
-
-      <button onClick={() => ping({ msg: "olá do Next", t: Date.now() })}>
-        Enviar client:ping (com ACK)
-      </button>
-
-      <button onClick={() => socket?.emit("join_room", { roomId: "room1", name: "NextUser" })}>
-        join_room
-      </button>
-    </main>
+    <div className={styles.page}>
+      <Scanlines variant="green" />
+      <div className={styles.terminal}>
+        <h1 className={styles.title}>&gt;&gt;TERMINAL DE ACESSO&lt;&lt;</h1>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="CODINOME"
+            value={codename}
+            onChange={(e) => setCodename(e.target.value)}
+            required
+            autoComplete="off"
+          />
+          <input
+            className={styles.input}
+            type="password"
+            placeholder="SENHA"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="CÓDIGO DA SALA (deixe em branco se for admin)"
+            value={roomId}
+            onChange={(e) => setRoomId(e.target.value.toUpperCase())}
+            maxLength={6}
+            autoComplete="off"
+          />
+          <button className={styles.button} type="submit" disabled={loading}>
+            {loading ? '[AUTENTICANDO...]' : '[INICIAR LOGIN]'}
+          </button>
+        </form>
+        <p className={styles.warning}>⚠ Sistema de rastreamento ativo. Acesso monitorado.</p>
+      </div>
+    </div>
   );
 }

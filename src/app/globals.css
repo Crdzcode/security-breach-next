@@ -1,26 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 @import "tailwindcss";
 
+/* ─── Variáveis de tema ───────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-terminal: #0f0;
+  --color-terminal-dim: rgba(0, 255, 0, 0.1);
+  --color-danger: #f00;
+  --color-danger-dim: rgba(255, 0, 0, 0.08);
+  --font-terminal: 'Share Tech Mono', monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Reset base ──────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #000;
+  color: var(--color-terminal);
+  font-family: var(--font-terminal);
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
 }
+
+/* ─── Animações compartilhadas ────────────────────────────────────────────── */
+@keyframes flicker {
+  0%   { opacity: 1; }
+  100% { opacity: 0.9; }
+}
+
+@keyframes flicker-fast {
+  0%   { opacity: 1; }
+  100% { opacity: 0.9; }
+}
+
+@keyframes flicker-red {
+  0%   { opacity: 1; }
+  100% { opacity: 0.85; }
+}
+
+@keyframes pulse-green {
+  0%   { box-shadow: 0 0 5px #0f0; }
+  100% { box-shadow: 0 0 15px #0f0; }
+}
+
+@keyframes pulse-red {
+  0%   { box-shadow: 0 0 5px #f00; }
+  100% { box-shadow: 0 0 15px #f00; }
+}
+
+@keyframes glitchTop {
+  0%   { transform: translateX(-2px); }
+  100% { transform: translateX(2px); }
+}
+
+@keyframes glitchBottom {
+  0%   { transform: translateX(2px); }
+  100% { transform: translateX(-2px); }
+}
+
+@keyframes fill-in {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* ─── Scanlines (overlay decorativo) ─────────────────────────────────────── */
+.scanlines {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  animation: flicker-fast 0.3s infinite alternate;
+}
+
+.scanlines--green {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-terminal-dim),
+    var(--color-terminal-dim) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+.scanlines--red {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-danger-dim),
+    var(--color-danger-dim) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+/* ─── Cores de status de agente ───────────────────────────────────────────── */
+.status-online  { color: #0f0; }
+.status-ausente { color: #f90; }
+.status-offline { color: #f00; }

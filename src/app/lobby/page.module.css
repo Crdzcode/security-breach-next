@@ -1,0 +1,273 @@
+/* ── Lobby — dashboard público, não é mobile-first (TV/desktop) ── */
+
+.page {
+  min-height: 100vh;
+  position: relative;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  animation: flicker 3s infinite alternate;
+}
+
+.roomBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border: 1px solid #0f0;
+  padding: 0.4rem 1.2rem;
+}
+
+.codeLabel {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  letter-spacing: 0.15rem;
+}
+
+.code {
+  font-size: 1.9rem;
+  letter-spacing: 0.4rem;
+  color: #0f0;
+  animation: pulse-green 1.5s infinite alternate;
+}
+
+/* ── Code entry form (shown when no roomId) ── */
+.codeForm {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.codeInput {
+  background: #000;
+  border: 1px solid rgba(0, 255, 0, 0.5);
+  color: #0f0;
+  font-family: var(--font-terminal);
+  font-size: 1rem;
+  padding: 0.5rem 0.8rem;
+  letter-spacing: 0.2rem;
+  width: 200px;
+  outline: none;
+}
+
+.codeInput:focus { border-color: #0f0; }
+
+.codeBtn {
+  background: #000;
+  border: 1px solid #0f0;
+  color: #0f0;
+  font-family: var(--font-terminal);
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.codeBtn:hover:not(:disabled) { background: rgba(0, 255, 0, 0.07); }
+.codeBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Game status strip ── */
+.gameStrip {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border: 1px solid rgba(0, 255, 0, 0.35);
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.2rem;
+  background: rgba(0, 255, 0, 0.03);
+  flex-wrap: wrap;
+}
+
+.roundBadge {
+  font-size: 1.1rem;
+  letter-spacing: 0.15rem;
+  color: #0f0;
+}
+
+.timer {
+  font-size: 1.4rem;
+  letter-spacing: 0.2rem;
+  color: #0f0;
+  animation: pulse-green 1.5s infinite alternate;
+}
+
+.timerWarning {
+  color: #f90;
+  animation: flicker 0.4s infinite alternate;
+}
+
+.phaseLabel {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  letter-spacing: 0.1rem;
+}
+
+.phaseDanger {
+  font-size: 0.85rem;
+  color: #f44;
+  letter-spacing: 0.1rem;
+}
+
+/* ── Counter ── */
+.counter {
+  font-size: 0.85rem;
+  opacity: 0.65;
+  margin: 0 0 1.5rem;
+  letter-spacing: 0.05rem;
+}
+
+.counter strong { color: #0f0; }
+
+/* ── Player grid ── */
+.playerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.playerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(0, 255, 0, 0.35);
+  padding: 1rem 0.8rem 0.8rem;
+  background: rgba(0, 0, 0, 0.85);
+  transition: opacity 0.3s, border-color 0.3s;
+}
+
+.playerCardOff {
+  opacity: 0.4;
+  border-color: rgba(0, 255, 0, 0.1);
+}
+
+.playerCardDeceased {
+  opacity: 0.3;
+  border-color: rgba(255, 0, 0, 0.2);
+  filter: grayscale(100%);
+}
+
+/* ── Photo ── */
+.photoWrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid rgba(0, 255, 0, 0.4);
+  display: block;
+}
+
+.dot {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  color: #0f0;
+  font-size: 0.85rem;
+  text-shadow: 0 0 4px #0f0;
+  line-height: 1;
+}
+
+.dotOff {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  color: #555;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+/* ── Player info ── */
+.playerName {
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.playerCode {
+  font-size: 0.7rem;
+  opacity: 0.5;
+  text-align: center;
+  margin: 0;
+  letter-spacing: 0.05rem;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  opacity: 0.45;
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
+}
+
+/* ── Action log (report phase) ── */
+.logSection {
+  border: 1px solid rgba(0, 255, 0, 0.25);
+  background: rgba(0, 255, 0, 0.02);
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.logTitle {
+  font-size: 0.8rem;
+  margin: 0 0 0.6rem;
+  opacity: 0.6;
+  letter-spacing: 0.08em;
+}
+
+.logContent {
+  font-family: var(--font-terminal);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
+  opacity: 0.85;
+}
+
+/* ── Footer ── */
+.footer {
+  border-top: 1px solid rgba(0, 255, 0, 0.25);
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.waiting {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.hint {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  margin: 0;
+}
+
+.hint strong {
+  color: #0f0;
+  letter-spacing: 0.1rem;
+}

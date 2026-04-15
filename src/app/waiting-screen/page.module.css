@@ -1,0 +1,88 @@
+/* ── Waiting screen — mobile-first ── */
+
+.page {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  border: 2px solid #0f0;
+  background: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 20px #0f0;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 1.2rem;
+  margin: 0 0 1.2rem;
+  animation: flicker 2s infinite alternate;
+}
+
+.status {
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Vote progress ── */
+.voteBox {
+  margin-bottom: 1.5rem;
+}
+
+.voteLabel {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.bar {
+  background: #111;
+  border: 1px solid #0f0;
+  height: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.fill {
+  background: #0f0;
+  height: 100%;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 6px #0f0;
+}
+
+/* ── Vote button ── */
+.voteBtn {
+  background: #000;
+  border: 2px solid #0f0;
+  color: #0f0;
+  font-family: var(--font-terminal);
+  font-size: 1rem;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  animation: pulse-green 1.5s infinite;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.voted {
+  font-size: 0.9rem;
+  color: #0f0;
+  margin-bottom: 1rem;
+}
+
+/* ── Blinking cursor ── */
+.blink {
+  font-size: 1.2rem;
+  opacity: 0.4;
+  animation: flicker 0.8s infinite alternate;
+  letter-spacing: 0.3rem;
+  margin-top: 1rem;
+}

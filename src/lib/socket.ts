@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 type Socket = ReturnType<typeof io>;
 
-const URL = process.env.NEXT_PUBLIC_WS_URL ?? "http://localhost:3000";
+const URL = process.env.NEXT_PUBLIC_WS_URL ?? "http://localhost:3001";
 
 let socket: Socket | null = null;
 

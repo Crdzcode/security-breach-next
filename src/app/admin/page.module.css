@@ -1,0 +1,238 @@
+/* ── Admin panel — não é mobile-first ── */
+
+.page {
+  min-height: 100vh;
+  position: relative;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.4rem;
+  animation: flicker 3s infinite alternate;
+}
+
+.connectedDot    { color: #0f0; font-size: 0.8rem; }
+.disconnectedDot { color: #555; font-size: 0.8rem; }
+
+.headerActions {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.durationWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.durationLabel {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  letter-spacing: 0.05rem;
+}
+
+.durationInput {
+  background: #000;
+  border: 1px solid rgba(0, 255, 0, 0.4);
+  color: #0f0;
+  font-family: var(--font-terminal);
+  font-size: 0.9rem;
+  padding: 0.3rem 0.5rem;
+  width: 70px;
+  outline: none;
+}
+
+.createBtn, .refreshBtn {
+  background: #000;
+  font-family: var(--font-terminal);
+  font-size: 0.95rem;
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+}
+
+.createBtn {
+  border: 2px solid #0f0;
+  color: #0f0;
+  animation: pulse-green 1.5s infinite;
+}
+
+.refreshBtn {
+  border: 1px solid rgba(0, 255, 0, 0.5);
+  color: rgba(0, 255, 0, 0.7);
+}
+
+.createBtn:hover  { background: rgba(0, 255, 0, 0.06); }
+.refreshBtn:hover { background: rgba(0, 255, 0, 0.04); }
+
+.createBtn:disabled,
+.refreshBtn:disabled {
+  opacity: 0.3;
+  animation: none;
+  cursor: not-allowed;
+}
+
+/* ── Error banner ── */
+.errorBanner {
+  border: 1px solid #f00;
+  color: #f00;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  background: rgba(255, 0, 0, 0.05);
+  animation: flicker 0.5s infinite alternate;
+}
+
+/* ── Created banner ── */
+.createdBanner {
+  border: 1px solid #0f0;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  background: rgba(0, 255, 0, 0.04);
+}
+
+.createdBanner strong {
+  font-size: 1.1rem;
+  letter-spacing: 0.2rem;
+}
+
+.empty {
+  opacity: 0.5;
+  font-size: 0.9rem;
+}
+
+/* ── Room list ── */
+.roomList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.roomCard {
+  border: 2px solid rgba(0, 255, 0, 0.4);
+  padding: 1rem 1.2rem;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+/* ── Room header row ── */
+.roomHeader {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.roomId {
+  font-size: 1.4rem;
+  letter-spacing: 0.3rem;
+  color: #0f0;
+}
+
+.roomPhase {
+  font-size: 0.85rem;
+  color: #f90;
+}
+
+.roomRound {
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.roomCount {
+  font-size: 0.85rem;
+  color: #0ff;
+  opacity: 0.8;
+}
+
+.startBtn {
+  background: #000;
+  border: 1px solid #0f0;
+  color: #0f0;
+  font-family: var(--font-terminal);
+  font-size: 0.9rem;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.startBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.startBtn:not(:disabled):hover {
+  background: rgba(0, 255, 0, 0.07);
+}
+
+.deleteBtn {
+  background: #000;
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  color: rgba(255, 0, 0, 0.8);
+  font-family: var(--font-terminal);
+  font-size: 0.9rem;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.deleteBtn:hover {
+  background: rgba(255, 0, 0, 0.08);
+  border-color: #f00;
+  color: #f00;
+}
+
+/* ── Table ── */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+}
+
+.table th {
+  opacity: 0.5;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.connected    { color: #0f0; font-size: 0.85rem; }
+.disconnected { color: #555; font-size: 0.85rem; }
+
+.emptyRow {
+  opacity: 0.4;
+  font-size: 0.85rem;
+  font-style: italic;
+  padding: 0.5rem 0.6rem !important;
+}
