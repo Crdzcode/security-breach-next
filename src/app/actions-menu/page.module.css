@@ -13,6 +13,56 @@
   z-index: 1;
 }
 
+/* ── Equipe ── */
+.teamSection {
+  margin-bottom: 1.2rem;
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  padding: 0.8rem;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.teamTitle {
+  font-size: 0.82rem;
+  letter-spacing: 0.1rem;
+  opacity: 0.7;
+  margin: 0 0 0.6rem;
+}
+
+.teamAlone {
+  font-size: 0.82rem;
+  color: #f55;
+  margin: 0;
+}
+
+.teamGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.teamCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border: 1px solid rgba(0, 255, 0, 0.25);
+  padding: 0.4rem 0.7rem;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.teamName {
+  font-size: 0.85rem;
+}
+
+.teamClass {
+  font-size: 0.7rem;
+  letter-spacing: 0.06rem;
+}
+
+.teamClass[data-class="Inocente"]  { color: #fff; }
+.teamClass[data-class="Assassino"] { color: #f44; }
+.teamClass[data-class="Policial"]  { color: #4af; }
+.teamClass[data-class="V.I.P"]     { color: #ffd700; }
+
 /* ── Player profile strip ── */
 .profile {
   display: flex;

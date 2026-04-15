@@ -133,9 +133,15 @@ export interface RoomPublic {
   players: PlayerPublic[];
 }
 
+export interface TeammateInfo {
+  codename: string;
+  displayName: string;
+  agentClass: AgentClass;
+}
+
 export interface GameStartedPayload {
   yourClass: AgentClass;
-  teammates: string[];
+  teammates: TeammateInfo[];
   missionBriefing: string;
   abilityGroups: AbilityGroup[];
   profile: {

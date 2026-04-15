@@ -193,8 +193,9 @@ export default function ActionsMenuPage() {
   if (!gameData) return null;
 
   const myCodename   = typeof window !== 'undefined' ? sessionStorage.getItem('player') : null;
+  const teammateCodenames = gameData.teammates.map((t) => t.codename);
   const validTargets = pendingAbility
-    ? getValidTargets(pendingAbility.ability.name, players, myCodename ?? '', gameData.teammates)
+    ? getValidTargets(pendingAbility.ability.name, players, myCodename ?? '', teammateCodenames)
         .filter((p) => !lockedTargets.has(p.codename))
     : [];
 
@@ -232,6 +233,28 @@ export default function ActionsMenuPage() {
       )}
 
       <div className={styles.container}>
+
+        {/* ── Equipe ── */}
+        <div className={styles.teamSection}>
+          <h2 className={styles.teamTitle}>&gt;&gt; EQUIPE</h2>
+          {gameData.yourClass === 'Inocente' ? (
+            <p className={styles.teamAlone}>
+              Você está <strong>SOZINHO</strong>, não confie em ninguém...
+            </p>
+          ) : (
+            <div className={styles.teamGrid}>
+              {gameData.teammates.map((t) => (
+                <div key={t.codename} className={styles.teamCard}>
+                  <span className={styles.teamName}>{t.displayName}</span>
+                  <span className={styles.teamClass} data-class={t.agentClass}>
+                    [{t.agentClass}]
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         {/* ── Perfil do jogador ── */}
         <div className={styles.profile}>
           <Image

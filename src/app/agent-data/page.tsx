@@ -6,12 +6,12 @@ import Image from 'next/image';
 import type { GameStartedPayload } from '@/types/game';
 import styles from './page.module.css';
 
-// ─── Cor do codinome por classe ───────────────────────────────────────────────
-const CODENAME_COLOR: Record<string, string> = {
-  Inocente: 'white',
+// ─── Cor por classe ───────────────────────────────────────────────────────────
+const CLASS_COLOR: Record<string, string> = {
+  Inocente: '#fff',
   Assassino: '#f00',
   Policial: '#4af',
-  'V.I.P': '#ff0',
+  'V.I.P': '#ffd700',
 };
 
 // ─── Hook: efeito typewriter ──────────────────────────────────────────────────
@@ -58,7 +58,7 @@ export default function AgentDataPage() {
   if (!data) return null;
 
   const { yourClass, teammates, missionBriefing, abilityGroups, profile } = data;
-  const codenameColor = CODENAME_COLOR[yourClass] ?? '#0ff';
+  const codenameColor = CLASS_COLOR[yourClass] ?? '#0ff';
 
   return (
     <div className={styles.page}>
@@ -108,28 +108,6 @@ export default function AgentDataPage() {
               ))}
             </div>
           ))}
-        </div>
-
-        {/* ── Equipe ── */}
-        <div className={styles.section}>
-          <h2>&gt;&gt; EQUIPE</h2>
-          {yourClass === 'Inocente' ? (
-            <p className={styles.alone}>
-              Você está <strong>SOZINHO</strong>, não confie em ninguém...
-            </p>
-          ) : (
-            <ul className={styles.teamList}>
-              {teammates.map((codename, i) => (
-                <li key={codename}>
-                  <span className={styles.online}>[ONLINE]</span>{' '}
-                  {codename.charAt(0).toUpperCase() + codename.slice(1)}
-                  {yourClass === 'Policial' && i === 0 && (
-                    <strong className={styles.vipLabel}> [V.I.P]</strong>
-                  )}
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
 
         {/* ── Briefing da missão ── */}

@@ -93,20 +93,33 @@
 }
 
 /* ─── Equipe ─── */
-.teamList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.teamGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
-.teamList li {
-  margin-bottom: 0.3rem;
+.teamCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border: 1px solid rgba(0, 255, 0, 0.35);
+  padding: 0.5rem 0.8rem;
+  background: rgba(0, 0, 0, 0.4);
+  min-width: 130px;
 }
 
-.online   { color: #0f0; }
-.offline  { color: #f00; }
-.alone    { color: #f00; }
-.vipLabel { color: #ff0; }
+.teamName {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.teamClass {
+  font-size: 0.75rem;
+  letter-spacing: 0.06rem;
+}
+
+.alone { color: #f00; }
 
 /* ─── Missão ─── */
 .missionText {
