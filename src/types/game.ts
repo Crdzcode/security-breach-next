@@ -2,7 +2,7 @@
 
 export type AgentStatus   = 'alive' | 'hiding' | 'deceased' | 'arrested' | 'downed';
 export type AgentClass    = 'Inocente' | 'Assassino' | 'Policial' | 'V.I.P';
-export type StatType      = 'Força' | 'Inteligência' | 'Dextreza';
+export type StatType      = 'Força' | 'Inteligência' | 'Destreza';
 export type Modifier      = '+1' | '0' | '-1';
 export type GamePhase     = 'lobby' | 'action' | 'resolving' | 'report' | 'game_over';
 export type WinnerSide    = 'assassins' | 'innocents' | null;

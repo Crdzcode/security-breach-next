@@ -22,7 +22,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '-1', habilities: assassinAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: assassinAbilities.intelligence },
-      { type: 'Dextreza', buff: '+1', habilities: assassinAbilities.dexterity },
+      { type: 'Destreza', buff: '+1', habilities: assassinAbilities.dexterity },
     ],
     agentTeam: ['emelly'],
     missionBriefing: missionBriefings.innocent,
@@ -38,7 +38,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '-1', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '+1', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '+1', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
@@ -54,7 +54,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '-1', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '+1', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '+1', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
@@ -70,7 +70,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '-1', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '+1', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '0', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '0', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
@@ -86,7 +86,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '-1', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '+1', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '+1', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
@@ -102,7 +102,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '0', habilities: vipAbilities.strength },
       { type: 'Inteligência', buff: '-1', habilities: vipAbilities.intelligence },
-      { type: 'Dextreza', buff: '+1', habilities: vipAbilities.dexterity },
+      { type: 'Destreza', buff: '+1', habilities: vipAbilities.dexterity },
     ],
     agentTeam: ['luis', 'gustavo'],
     missionBriefing: missionBriefings.vip,
@@ -118,7 +118,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '0', habilities: copAbilities.strength },
       { type: 'Inteligência', buff: '-1', habilities: copAbilities.intelligence },
-      { type: 'Dextreza', buff: '+1', habilities: copAbilities.dexterity },
+      { type: 'Destreza', buff: '+1', habilities: copAbilities.dexterity },
     ],
     agentTeam: ['caio', 'gustavo'],
     missionBriefing: missionBriefings.cop,
@@ -134,7 +134,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '+1', habilities: copAbilities.strength },
       { type: 'Inteligência', buff: '-1', habilities: copAbilities.intelligence },
-      { type: 'Dextreza', buff: '0', habilities: copAbilities.dexterity },
+      { type: 'Destreza', buff: '0', habilities: copAbilities.dexterity },
     ],
     agentTeam: ['caio', 'luis'],
     missionBriefing: missionBriefings.cop,
@@ -150,7 +150,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '+1', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '-1', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '-1', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
@@ -166,7 +166,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '-1', habilities: assassinAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: assassinAbilities.intelligence },
-      { type: 'Dextreza', buff: '+1', habilities: assassinAbilities.dexterity },
+      { type: 'Destreza', buff: '+1', habilities: assassinAbilities.dexterity },
     ],
     agentTeam: ['pietra'],
     missionBriefing: missionBriefings.assassin,
@@ -182,7 +182,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '-1', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '+1', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '+1', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
@@ -198,7 +198,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '+1', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '-1', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '-1', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
@@ -213,7 +213,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '+1', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '-1', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '-1', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
@@ -228,7 +228,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '-1', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '+1', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '+1', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
@@ -243,7 +243,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '-1', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '+1', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '+1', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
@@ -258,7 +258,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '0', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '+1', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '-1', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '-1', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
@@ -273,7 +273,7 @@ export const agentsData: AgentsData = {
     agentAbilities: [
       { type: 'Força', buff: '+1', habilities: innocentAbilities.strength },
       { type: 'Inteligência', buff: '0', habilities: innocentAbilities.intelligence },
-      { type: 'Dextreza', buff: '-1', habilities: innocentAbilities.dexterity },
+      { type: 'Destreza', buff: '-1', habilities: innocentAbilities.dexterity },
     ],
     agentTeam: [],
     missionBriefing: missionBriefings.innocent,
