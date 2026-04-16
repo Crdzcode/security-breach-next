@@ -10,7 +10,7 @@ import styles from './page.module.css';
 const STAT_LABELS = [
   { key: 'strength',     label: 'FORÇA' },
   { key: 'intelligence', label: 'INTELIGÊNCIA' },
-  { key: 'dexterity',    label: 'DEXTREZA' },
+  { key: 'dexterity',    label: 'DESTREZA' },
 ] as const;
 
 function modifierClass(mod: string) {
