@@ -49,7 +49,10 @@ function ReportScreenContent() {
     const fromUrl     = searchParams.get('room')?.toUpperCase() ?? '';
     const fromSession = sessionStorage.getItem('roomId')         ?? '';
     const fromLocal   = localStorage.getItem('roomId')           ?? '';
-    setRoomId(fromUrl || fromSession || fromLocal);
+    const id = fromUrl || fromSession || fromLocal;
+    setRoomId(id);
+    // Persiste para que o handler de reconexão consiga re-entrar na sala
+    if (id) localStorage.setItem('roomId', id);
   }, [router, searchParams]);
 
   useEffect(() => {

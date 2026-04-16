@@ -44,6 +44,13 @@ function LobbyContent() {
     roomIdRef.current = id;
   }, [searchParams]);
 
+  // Mantém roomIdRef sempre em sincronia com o state (cobre handleWatch e qualquer outra mutação)
+  // e persiste no localStorage para que o handler de reconexão consiga re-entrar na sala
+  useEffect(() => {
+    roomIdRef.current = roomId;
+    if (roomId) localStorage.setItem('roomId', roomId);
+  }, [roomId]);
+
   // Countdown timer tick
   useEffect(() => {
     if (timerRef.current) clearInterval(timerRef.current);
