@@ -84,8 +84,9 @@ export default function AdminPage() {
     setExpectedPlayers(n);
     setTasks(n * 5);
   }
-  function startGame(roomId: string) { socket?.emit('admin:start_game', roomId); }
-  function deleteRoom(roomId: string){ socket?.emit('admin:delete_room', roomId); }
+  function startGame(roomId: string)       { socket?.emit('admin:start_game', roomId); }
+  function forceNextRound(roomId: string)  { socket?.emit('admin:force_next_round', roomId); }
+  function deleteRoom(roomId: string)      { socket?.emit('admin:delete_room', roomId); }
   function refreshRooms()            { socket?.emit('admin:list_rooms'); }
 
   if (!authorized) return null;
@@ -169,6 +170,15 @@ export default function AdminPage() {
                     onClick={() => startGame(room.id)}
                   >
                     [▶ INICIAR]
+                  </button>
+                )}
+                {room.phase === 'report' && (
+                  <button
+                    className={styles.forceNextRoundBtn}
+                    title="Forçar início da próxima rodada"
+                    onClick={() => forceNextRound(room.id)}
+                  >
+                    [⏭ PRÓXIMA RODADA]
                   </button>
                 )}
                 <button
